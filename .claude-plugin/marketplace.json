@@ -1,0 +1,17 @@
+{
+  "name": "evolink",
+  "owner": {
+    "name": "EvoLink",
+    "url": "https://evolink.ai"
+  },
+  "metadata": {
+    "description": "EvoLink plugins: 150+ image, video and audio models in your AI assistant through EvoLink's remote MCP server."
+  },
+  "plugins": [
+    {
+      "name": "evolink",
+      "source": "./",
+      "description": "Find models, get a quote and generate images, video and music with EvoLink's 150+ models. Sign in with your EvoLink account; no API key needed."
+    }
+  ]
+}

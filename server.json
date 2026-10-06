@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.evolink/mcp",
+  "title": "EvoLink",
+  "description": "150+ image, video and audio models. Quote before you generate; pay as you go.",
+  "version": "1.0.0",
+  "websiteUrl": "https://evolink.ai/mcp",
+  "repository": {
+    "url": "https://github.com/Evolink-AI/evolink-plugins",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.evolink.ai/mcp"
+    }
+  ]
+}
