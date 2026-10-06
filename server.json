@@ -6,7 +6,7 @@
   "version": "1.0.0",
   "websiteUrl": "https://evolink.ai/mcp",
   "repository": {
-    "url": "https://github.com/Evolink-AI/evolink-plugins",
+    "url": "https://github.com/Evolink-AI/mcp-plugin",
     "source": "github"
   },
   "remotes": [

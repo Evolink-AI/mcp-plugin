@@ -8,7 +8,7 @@
     "url": "https://evolink.ai"
   },
   "homepage": "https://evolink.ai/mcp",
-  "repository": "https://github.com/Evolink-AI/evolink-plugins",
+  "repository": "https://github.com/Evolink-AI/mcp-plugin",
   "license": "Apache-2.0",
   "keywords": [
     "mcp",

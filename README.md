@@ -1,4 +1,4 @@
-# EvoLink plugins
+# EvoLink MCP plugin
 
 Use 150+ image, video and audio models (Seedance, Kling, Veo, Sora, GPT Image, Nano Banana, Suno and more) from your AI assistant. This repository packages EvoLink's remote MCP server, `https://mcp.evolink.ai/mcp`, with a skill that teaches the assistant to find a model, quote the price and generate only after you confirm.
 
@@ -13,7 +13,7 @@ Use 150+ image, video and audio models (Seedance, Kling, Veo, Sora, GPT Image, N
 Run these in Claude Code (run `/reload-plugins` if Claude Code asks you to):
 
 ```text
-/plugin marketplace add Evolink-AI/evolink-plugins
+/plugin marketplace add Evolink-AI/mcp-plugin
 /plugin install evolink@evolink
 ```
 
@@ -35,7 +35,7 @@ codex mcp login evolink
 Or install the plugin, which also adds the skill, then start a new session and sign in when asked:
 
 ```bash
-codex plugin marketplace add Evolink-AI/evolink-plugins
+codex plugin marketplace add Evolink-AI/mcp-plugin
 codex plugin add evolink@evolink
 ```
 
@@ -68,7 +68,7 @@ code --add-mcp '{"name":"evolink","type":"http","url":"https://mcp.evolink.ai/mc
 ### Skills only
 
 ```bash
-npx skills add Evolink-AI/evolink-plugins
+npx skills add Evolink-AI/mcp-plugin
 ```
 
 This installs the skill for agents that support skills. Add the MCP server in your client as shown above; the skill alone cannot generate anything.

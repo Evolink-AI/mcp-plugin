@@ -7,7 +7,7 @@
     "name": "EvoLink"
   },
   "homepage": "https://evolink.ai/mcp",
-  "repository": "https://github.com/Evolink-AI/evolink-plugins",
+  "repository": "https://github.com/Evolink-AI/mcp-plugin",
   "license": "Apache-2.0",
   "logo": "assets/logo.png",
   "mcpServers": "./.mcp.json"
