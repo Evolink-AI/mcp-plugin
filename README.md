@@ -10,29 +10,32 @@ Use 150+ image, video and audio models (Seedance, Kling, Veo, Sora, GPT Image, N
 
 ### Claude Code
 
-Run these in Claude Code (run `/reload-plugins` if Claude Code asks you to):
+One command adds EvoLink and signs you in (run it in your terminal, or type `!` in Claude Code and paste it):
+
+```bash
+claude mcp add --transport http --scope user evolink https://mcp.evolink.ai/mcp && claude mcp login evolink
+```
+
+Your browser opens the EvoLink sign-in page; approve, then reopen Claude Code. On Windows PowerShell 5, replace `&&` with `;`.
+
+To get the skill as well, install the plugin instead (run `/reload-plugins` if Claude Code asks you to), then type `/mcp`, choose `evolink` and select **Authenticate**:
 
 ```text
 /plugin marketplace add Evolink-AI/mcp-plugin
 /plugin install evolink@evolink
 ```
 
-Then type `/mcp`, choose `evolink`, click **Authenticate** and sign in to EvoLink in your browser.
-
-Prefer no plugin? Add only the server:
-
-```bash
-claude mcp add --transport http --scope user evolink https://mcp.evolink.ai/mcp
-```
-
 ### Codex
+
+One command; Codex 0.77 or later opens the browser sign-in by itself:
 
 ```bash
 codex mcp add evolink --url https://mcp.evolink.ai/mcp
-codex mcp login evolink
 ```
 
-Or install the plugin, which also adds the skill, then start a new session and sign in when asked:
+Run `codex mcp login evolink` only if the output says the server "may or may not require login" or no browser opens.
+
+Or install the plugin, which also adds the skill, then sign in with `codex mcp login evolink`:
 
 ```bash
 codex plugin marketplace add Evolink-AI/mcp-plugin
@@ -41,7 +44,7 @@ codex plugin add evolink@evolink
 
 ### Cursor
 
-[Add to Cursor](cursor://anysphere.cursor-deeplink/mcp/install?name=evolink&config=eyJ1cmwiOiJodHRwczovL21jcC5ldm9saW5rLmFpL21jcCJ9), or add this to `~/.cursor/mcp.json` and sign in from Cursor's MCP settings:
+[Add to Cursor](https://cursor.com/install-mcp?name=evolink&config=eyJ1cmwiOiJodHRwczovL21jcC5ldm9saW5rLmFpL21jcCJ9), then find `evolink` in Cursor's MCP settings and click **Connect** to sign in. Or add this to `~/.cursor/mcp.json`:
 
 ```json
 {
@@ -52,6 +55,26 @@ codex plugin add evolink@evolink
   }
 }
 ```
+
+With the Cursor CLI, sign in with `agent mcp login evolink` after adding the config.
+
+### Hermes Agent
+
+```bash
+hermes mcp add evolink --url https://mcp.evolink.ai/mcp --auth oauth --connect-timeout 300
+```
+
+The browser sign-in opens by itself; press Enter when asked to enable the tools, then `/reload-mcp` in an open session. (Based on Hermes' documentation; not tested by us yet.)
+
+### OpenClaw
+
+Run on the machine that hosts the OpenClaw Gateway, then open the printed link to sign in:
+
+```bash
+openclaw mcp add evolink --url https://mcp.evolink.ai/mcp --transport streamable-http --auth oauth && openclaw mcp login evolink
+```
+
+(Based on OpenClaw's documentation; not tested by us yet.)
 
 ### Claude (web and desktop)
 
