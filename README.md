@@ -101,8 +101,11 @@ This installs the skill for agents that support skills. Add the MCP server in yo
 | `get_task` | Check a task's progress and results | Free |
 | `list_tasks` | List recent tasks | Free |
 | `check_balance` | See your balance and what MCP has spent | Free |
+| `upload_file` | Store a public link or a file under 1 MB on EvoLink and get a link for generation | Free |
+| `prepare_upload` | Get a one-time upload URL for a local file up to 95 MB | Free |
+| `get_upload` | Check a one-time upload and get the file link | Free |
 
-Signed-in connections can't upload local files yet; give public links for reference images or videos.
+The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 72 hours.
 
 ## Costs and control
 
