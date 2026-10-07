@@ -53,14 +53,6 @@ codex plugin add evolink@evolink
 }
 ```
 
-### VS Code
-
-[Install in VS Code](https://vscode.dev/redirect/mcp/install?name=evolink&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.evolink.ai%2Fmcp%22%7D), or run:
-
-```bash
-code --add-mcp '{"name":"evolink","type":"http","url":"https://mcp.evolink.ai/mcp"}'
-```
-
 ### Claude (web and desktop)
 
 [Add to Claude](https://claude.ai/customize/connectors?modal=add-custom-connector&connectorName=EvoLink&connectorUrl=https%3A%2F%2Fmcp.evolink.ai%2Fmcp) opens the **Add custom connector** dialog with the name and URL filled in. Click **Add**, then **Connect**, and sign in to EvoLink. Claude's Free plan can add one custom connector.
@@ -100,7 +92,7 @@ Signed-in connections can't upload local files yet; give public links for refere
 | Path | Used by |
 |---|---|
 | `.claude-plugin/marketplace.json`, `.claude-plugin/plugin.json`, `.mcp.json` | Claude Code |
-| `plugin.json`, `mcp.json` ([Agent Plugins](https://agent-plugins.org)) | Codex, Cursor, VS Code, GitHub Copilot |
+| `plugin.json`, `mcp.json` ([Agent Plugins](https://agent-plugins.org)) | Codex, Cursor |
 | `.agents/plugins/marketplace.json` | Codex |
 | `.cursor-plugin/plugin.json` | Cursor |
 | `skills/evolink-media/SKILL.md` | All of the above, and `npx skills add` |
