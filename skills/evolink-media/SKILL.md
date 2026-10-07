@@ -13,7 +13,7 @@ If tools such as `search_models` and `generate_video` are not available, the ser
 
 - Claude Code: run `/mcp`, choose `evolink` and click **Authenticate**.
 - Codex: run `codex mcp login evolink`.
-- Other clients: see https://evolink.ai/mcp
+- Other clients: see https://evolink.ai/mcp?utm_source=mcp_other&utm_medium=mcp&utm_campaign=mcp_remote&utm_content=mcp_page
 
 ## Workflow
 

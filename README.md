@@ -4,7 +4,7 @@ Use 150+ image, video and audio models (Seedance, Kling, Veo, Sora, GPT Image, N
 
 - **No API key to copy.** The first time, you sign in to EvoLink in your browser and approve the connection.
 - **Pay as you go.** Generation is charged to your EvoLink balance at the same prices as the API. The MCP itself is free and needs no subscription.
-- **Website:** https://evolink.ai/mcp
+- **Website:** [evolink.ai/mcp](https://evolink.ai/mcp?utm_source=github&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=readme_intro)
 
 ## Install
 
@@ -125,7 +125,7 @@ The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository hold
 
 ## Support
 
-- Setup guide: https://evolink.ai/mcp
+- Setup guide: [evolink.ai/mcp](https://evolink.ai/mcp?utm_source=github&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=readme_support)
 - Email: support@evolink.ai
 
 ## License
