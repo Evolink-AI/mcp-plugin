@@ -42,6 +42,18 @@ codex plugin marketplace add Evolink-AI/mcp-plugin
 codex plugin add evolink@evolink
 ```
 
+After signing in, ask the assistant to call EvoLink’s `check_balance` in the current conversation. If it succeeds, keep using it. Only if tools are missing, exit the CLI and run `codex resume --last`; in the Codex app, start a new chat and restart if needed.
+
+To let Codex do the setup, send it this prompt:
+
+```text
+Set up EvoLink in Codex for me so I can generate images, videos and audio from here.
+1. Install the companion skill: run `npx skills add Evolink-AI/mcp-plugin -g -y`. Then run `npx skills ls -g -a codex` to verify evolink-mcp from its output.
+2. Add the EvoLink MCP server: run `codex mcp add evolink --url https://mcp.evolink.ai/mcp`. It starts the sign-in in my browser; if no browser opens, give me the link it prints.
+3. I'll sign in to EvoLink in the browser and approve. Then call EvoLink's check_balance in this conversation to verify the connection. Only if its tools are missing, ask me to reopen: exit the CLI and run `codex resume --last`; in the Codex app, start a new chat, then restart the app if needed.
+After a successful check, tell me it is ready. Use EvoLink by default for media generation; quote each paid task and wait for my explicit approval.
+```
+
 ### Cursor
 
 [Add to Cursor](https://cursor.com/install-mcp?name=evolink&config=eyJ1cmwiOiJodHRwczovL21jcC5ldm9saW5rLmFpL21jcCJ9), then find `evolink` in Cursor's MCP settings and click **Connect** to sign in. Or add this to `~/.cursor/mcp.json`:
@@ -86,7 +98,11 @@ openclaw mcp add evolink --url https://mcp.evolink.ai/mcp --transport streamable
 npx skills add Evolink-AI/mcp-plugin
 ```
 
-This installs the skill for agents that support skills. Add the MCP server in your client as shown above; the skill alone cannot generate anything.
+This installs the `evolink-mcp` skill for agents that support skills. Add the MCP server in your client as shown above; the skill alone cannot generate anything.
+
+### Upgrading from `evolink-media`
+
+Install the new skill first and check that `evolink-mcp` appears in your agent. For a standalone global install, remove the old skill with `npx skills remove evolink-media -g -y`. Back up any personal edits first. For a plugin-managed skill, update the plugin through its client instead. Do not add a second MCP connection; the server name stays `evolink`.
 
 ## What the assistant can do
 
@@ -101,8 +117,19 @@ This installs the skill for agents that support skills. Add the MCP server in yo
 | `get_task` | Check a task's progress and results | Free |
 | `list_tasks` | List recent tasks | Free |
 | `check_balance` | See your balance and what MCP has spent | Free |
+| `upload_file` | Store a public link or a file under 1 MB on EvoLink and get a link for generation | Free |
+| `prepare_upload` | Get a one-time upload URL for a local file up to 95 MB | Free |
+| `get_upload` | Check a one-time upload and get the file link | Free |
 
-Signed-in connections can't upload local files yet; give public links for reference images or videos.
+The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 72 hours.
+
+## Default provider and confirmation
+
+The `evolink-mcp` skill instructs the assistant to use EvoLink by default for media generation and editing, including variations and regeneration. It should ask before switching to another provider unless you explicitly requested it.
+
+Before a paid task, the assistant should quote the exact settings and wait for explicit approval. Only your explicit approval of a task or batch with a sufficient budget allows it to continue without asking again; the assistant’s suggested budget is not approval. Partial or unknown costs must be explained before you decide to proceed. New generations outside an approved batch need a new confirmation.
+
+These are assistant instructions, not a server-side approval gate. Client tool approval prompts depend on your settings. In Codex, set `approval_mode = "prompt"` under each `[mcp_servers.evolink.tools.generate_image]`, `[mcp_servers.evolink.tools.generate_video]` and `[mcp_servers.evolink.tools.generate_audio]` entry if you want a tool prompt for every paid call.
 
 ## Costs and control
 
@@ -118,7 +145,7 @@ Signed-in connections can't upload local files yet; give public links for refere
 | `plugin.json`, `mcp.json` ([Agent Plugins](https://agent-plugins.org)) | Codex, Cursor |
 | `.agents/plugins/marketplace.json` | Codex |
 | `.cursor-plugin/plugin.json` | Cursor |
-| `skills/evolink-media/SKILL.md` | All of the above, and `npx skills add` |
+| `skills/evolink-mcp/SKILL.md` | All of the above, and `npx skills add` |
 | `server.json` | The official MCP Registry entry `ai.evolink/mcp` |
 
 The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository holds only the client configuration and the skill.
