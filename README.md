@@ -113,6 +113,7 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `search_docs` | Search the bundled official model references: names, IDs and parameter descriptions | Free |
 | `get_model` | See a model's parameters and prices | Free |
 | `estimate_cost` | Get a quote before generating | Free |
+| `get_pricing_rules` | Read the public default pricing rules an estimate is based on (reference rates, no account discounts) | Free |
 | `generate_image` | Generate images | Model price |
 | `generate_video` | Generate video | Model price |
 | `generate_audio` | Generate music, songs or speech | Model price |
