@@ -24,7 +24,7 @@ If tools such as `search_models` and `generate_video` are not available, the ser
 ## Workflow
 
 1. Understand what the user wants: image, video, music or speech, plus style, length and aspect ratio. Ask only for what is missing.
-2. Find models with `search_models` and compare suitable candidates with `get_model`, following the model-selection guidance below.
+2. Find models with `search_models`, or let `recommend_models` compare candidates for the request and its reference inputs. Check parameters with `get_model` and look up the official model references with `search_docs`. Follow the model-selection guidance below.
 3. Pass `model` as its own argument and every other parameter inside `input`, named exactly as `get_model` lists them.
 4. Before each new paid generation, call `estimate_cost` with the exact `model` and `input` you plan to send. Show the model, output settings and estimated cost. Explain any partial estimate or unknown final cost. End the reply and wait for the user to explicitly approve that quoted task before calling a generate tool. Follow the approval rules below.
 5. Generate with `generate_image`, `generate_video` or `generate_audio`:
@@ -108,7 +108,7 @@ Reply "Confirm generation" and I will submit this generation task.
 
 ## Costs and limits
 
-- Only the three generate tools cost money. Searching, quoting, task checks and `check_balance` are free.
+- Only the three generate tools cost money. Searching, recommendations, docs lookup, quoting, task checks, `get_task_usage` and `check_balance` are free.
 - Failed tasks are refunded. There is no cancel tool, so confirm before submitting.
 - When a call is refused for money, tell the user which reason the error names: the EvoLink MCP spending limit or daily limit they set, EvoLink MCP being paused, or the account balance. They need different fixes, so never call an MCP limit a low balance. Give the link from the error and do not retry until the user has acted.
 - Other errors include a next step; follow it instead of retrying blindly.
@@ -121,3 +121,4 @@ Reference images, audio and video are passed as public http(s) links inside `inp
 
 - After a lost connection, use `list_tasks` to find recent tasks instead of generating again.
 - `check_balance` shows the balance and what EvoLink MCP has spent.
+- `get_task_usage` summarizes the reported cost of completed tasks over a period. It is bounded and not an invoice.

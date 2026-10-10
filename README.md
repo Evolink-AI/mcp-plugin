@@ -109,6 +109,8 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | Tool | What it does | Cost |
 |---|---|---|
 | `search_models` | Find image, video and audio models by type and keywords | Free |
+| `recommend_models` | Compare models for your request and reference types, with reasons | Free |
+| `search_docs` | Search the bundled official model references: names, IDs and parameter descriptions | Free |
 | `get_model` | See a model's parameters and prices | Free |
 | `estimate_cost` | Get a quote before generating | Free |
 | `generate_image` | Generate images | Model price |
@@ -116,6 +118,7 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `generate_audio` | Generate music, songs or speech | Model price |
 | `get_task` | Check a task's progress and results | Free |
 | `list_tasks` | List recent tasks | Free |
+| `get_task_usage` | Summarize the cost of completed tasks over a period; bounded, not an invoice | Free |
 | `check_balance` | See your balance and what MCP has spent | Free |
 | `upload_file` | Store a public link or a file under 1 MB on EvoLink and get a link for generation | Free |
 | `prepare_upload` | Get a one-time upload URL for a local file up to 95 MB | Free |
