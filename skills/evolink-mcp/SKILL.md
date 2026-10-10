@@ -108,7 +108,7 @@ Reply "Confirm generation" and I will submit this generation task.
 
 ## Costs and limits
 
-- Only the three generate tools cost money. Searching, recommendations, docs lookup, quoting, task checks, `get_task_usage` and `check_balance` are free.
+- Only the three generate tools cost money. Searching, recommendations, docs lookup, quoting, `get_pricing_rules`, task checks, `get_task_usage` and `check_balance` are free. Pricing rules are public reference rates, not a quote or a spending cap; use `estimate_cost` for the actual estimate.
 - Failed tasks are refunded. There is no cancel tool, so confirm before submitting.
 - When a call is refused for money, tell the user which reason the error names: the EvoLink MCP spending limit or daily limit they set, EvoLink MCP being paused, or the account balance. They need different fixes, so never call an MCP limit a low balance. Give the link from the error and do not retry until the user has acted.
 - Other errors include a next step; follow it instead of retrying blindly.
