@@ -1,5 +1,7 @@
 # EvoLink MCP plugin
 
+[![smithery badge](https://smithery.ai/badge/Evolinkai/evolink-mcp)](https://smithery.ai/servers/Evolinkai/evolink-mcp)
+
 Use 150+ image, video and audio models (Seedance, Kling, Veo, Sora, GPT Image, Nano Banana, Suno and more) from your AI assistant. This repository packages EvoLink's remote MCP server, `https://mcp.evolink.ai/mcp`, with a skill that teaches the assistant to find a model, quote the price and generate only after you confirm.
 
 - **No API key to copy.** The first time, you sign in to EvoLink in your browser and approve the connection.
