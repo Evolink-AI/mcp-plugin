@@ -1,0 +1,15 @@
+{
+  "name": "evolink",
+  "version": "1.0.4",
+  "description": "Generate images, video, music, and speech with EvoLink. Discover models, estimate costs, and track results through a remote MCP server with browser sign-in.",
+  "mcpServers": {
+    "evolink": {
+      "httpUrl": "https://mcp.evolink.ai/mcp",
+      "oauth": {
+        "enabled": true,
+        "scopes": ["mcp", "offline_access"]
+      }
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}

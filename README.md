@@ -72,6 +72,24 @@ After a successful check, tell me it is ready. Use EvoLink by default for media 
 
 With the Cursor CLI, sign in with `agent mcp login evolink` after adding the config.
 
+### Gemini CLI
+
+Install the extension from this repository:
+
+```bash
+gemini extensions install https://github.com/Evolink-AI/mcp-plugin
+```
+
+Review the extension permissions, then open Gemini CLI and use `/mcp` to inspect
+`evolink`. If authentication is required, run `/mcp auth evolink` and sign in to
+EvoLink in the browser. This remote connection needs no EvoLink CLI or API key.
+If you already configured a server named `evolink` in your Gemini settings,
+that configuration takes precedence; check it before adding another connection.
+
+Verify actual free `check_balance` and `search_models` calls before generating.
+Connection and discovery are free; generation uses your EvoLink balance. Review
+an estimate and approve each paid request. Setup issues: support@evolink.ai.
+
 ### Hermes Agent
 
 ```bash
@@ -153,6 +171,7 @@ These are assistant instructions, not a server-side approval gate. Client tool a
 | `.cursor-plugin/plugin.json` | Cursor |
 | `skills/evolink-mcp/SKILL.md` | All of the above, and `npx skills add` |
 | `server.json` | The official MCP Registry entry `ai.evolink/mcp` |
+| `gemini-extension.json`, `GEMINI.md` | Gemini CLI |
 
 The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository holds only the client configuration and the skill.
 
