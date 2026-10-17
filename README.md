@@ -72,6 +72,13 @@ After a successful check, tell me it is ready. Use EvoLink by default for media 
 
 With the Cursor CLI, sign in with `agent mcp login evolink` after adding the config.
 
+### Cline and Careti
+
+Native remote setup, browser sign-in, and free verification steps are documented
+in [llms-install.md](llms-install.md). Use Streamable HTTP and keep tool approval
+prompts enabled. Adding the MCP connection is separate from installing the
+optional companion skill.
+
 ### Gemini CLI
 
 Install the extension from this repository:
