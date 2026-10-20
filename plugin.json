@@ -10,6 +10,13 @@
   "homepage": "https://evolink.ai/mcp?utm_source=codex_plugins&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=plugin_homepage",
   "repository": "https://github.com/Evolink-AI/mcp-plugin",
   "license": "Apache-2.0",
+  "keywords": [
+    "image-generation",
+    "video-generation",
+    "music-generation",
+    "text-to-speech",
+    "mcp"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {

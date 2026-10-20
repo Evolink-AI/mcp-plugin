@@ -179,6 +179,8 @@ The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository hold
 
 - Setup guide: [evolink.ai/mcp](https://evolink.ai/mcp?utm_source=github&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=readme_support)
 - Email: support@evolink.ai
+- Privacy policy: [evolink.ai/privacy](https://evolink.ai/privacy)
+- Terms of service: [evolink.ai/terms](https://evolink.ai/terms)
 
 ## License
 
