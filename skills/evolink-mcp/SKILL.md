@@ -63,7 +63,7 @@ Use the original returned media URL and the requested output path. Use your appl
 
 ## Generation confirmation
 
-When spending approval is needed, use the following layout in the user's language. Fill it from the exact model and input checked by `estimate_cost`; summarize the content in one sentence. Render normal text and bullets; the code blocks below only illustrate the layout.
+When spending approval is needed, use the following layout in English by default unless the user explicitly requests another language. Fill it from the exact model and input checked by `estimate_cost`; summarize the content in one sentence. Render normal text and bullets; the code blocks below only illustrate the layout.
 
 Chinese:
 
@@ -91,7 +91,10 @@ Reply "Confirm generation" and I will submit this generation task.
 
 - Include only applicable output settings supported by the selected model. Use the chosen reference inputs; do not invent settings, prices or totals.
 - For a complete estimate, show the returned amount or range in credits and approximate USD. Label it as an estimate, not a guaranteed final charge.
+- Do not add a separate estimated cap or max_cost_usd to the default confirmation. If the user specified a budget, state whether the estimate fits it; pause if it exceeds the budget. A budget comparison does not limit the final settlement.
 - For a partial estimate, label it "部分估价" / "Partial estimate", state what is excluded, and say it is neither the total nor an upper bound.
+- Keep model web and image search off unless the user explicitly requests or approves enabling it. Never enable search on your own or just because a copied example enables it. If you think search is needed, first explain its extra per-search rates and unknown total, end the reply, and wait for explicit user consent before enabling it. Approval of a task without search does not authorize adding search; changed search settings require a fresh estimate and approval.
+- When search_charges is returned, disclose each enabled search type and its per-search rate before generation approval, even when the user requested search. A zero-search subtotal excludes unknown search fees; one task may search multiple times or not at all. Expected counts are assumptions, not execution limits. Actual counts depend on the task and model strategy. Do not add a search-fee warning when search is off.
 - For token billing, say "按实际 token 用量计费，生成前无法确定总价" / "Billed by actual token usage; the total is unknown before generation." Include the applicable published unit rates when returned. If no price is available, say so rather than assuming token billing.
 - If the user set a fixed cap that cannot be checked, explain that gap and replace the usual closing with an explicit question about proceeding without that cap. Do not treat a generic "Confirm generation" as consent to remove or raise a cap.
 - The suggested confirmation phrase is not a required command; any clear approval of the quoted task is valid. Existing task or batch approval still follows the spending approval rules; do not ask again when it already covers this request.
