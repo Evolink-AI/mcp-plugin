@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "evolink",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Find models, get a quote and generate images, video and music with EvoLink's 150+ models. Sign in with your EvoLink account; no API key needed.",
   "author": {
     "name": "EvoLink",
@@ -10,6 +10,13 @@
   "homepage": "https://evolink.ai/mcp?utm_source=codex_plugins&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=plugin_homepage",
   "repository": "https://github.com/Evolink-AI/mcp-plugin",
   "license": "Apache-2.0",
+  "keywords": [
+    "image-generation",
+    "video-generation",
+    "music-generation",
+    "text-to-speech",
+    "mcp"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
