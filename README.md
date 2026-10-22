@@ -179,8 +179,15 @@ These are assistant instructions, not a server-side approval gate. Client tool a
 | `skills/evolink-mcp/SKILL.md` | All of the above, and `npx skills add` |
 | `server.json` | The official MCP Registry entry `ai.evolink/mcp` |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI |
+| `.grok-plugin/plugin.json`, `.mcp.json` | Grok Build |
 
 The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository holds only the client configuration and the skill.
+
+## Network endpoints and credentials
+
+- **MCP server:** `https://mcp.evolink.ai/mcp` (Streamable HTTP). Every tool call goes there. Prompts, parameters and reference file links are sent to EvoLink to run the task; results come back as links.
+- **Sign-in:** OAuth 2.1 with PKCE through `https://passport.evolink.ai`, with the approval page on `evolink.ai`. Scopes are `mcp` and `offline_access`. Your assistant stores the tokens it receives.
+- **No secrets or local code:** this repository contains no API keys, hooks, scripts or post-install commands. It holds configuration files and a Markdown skill.
 
 ## Support
 
