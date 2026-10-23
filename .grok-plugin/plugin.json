@@ -1,0 +1,18 @@
+{
+  "name": "evolink",
+  "version": "1.0.7",
+  "description": "Find models, get a quote and generate images, video and music with EvoLink's 150+ models. Sign in with your EvoLink account; no API key needed.",
+  "author": {
+    "name": "EvoLink",
+    "url": "https://evolink.ai"
+  },
+  "homepage": "https://evolink.ai/mcp?utm_source=grok_plugins&utm_medium=referral&utm_campaign=mcp_plugin&utm_content=plugin_homepage",
+  "repository": "https://github.com/Evolink-AI/mcp-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "evolink",
+    "evolink mcp",
+    "evolink ai"
+  ],
+  "logo": "assets/logo.png"
+}
