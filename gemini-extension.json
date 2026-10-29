@@ -1,6 +1,6 @@
 {
   "name": "evolink",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generate images, video, music, and speech with EvoLink. Discover models, estimate costs, and track results through a remote MCP server with browser sign-in.",
   "mcpServers": {
     "evolink": {

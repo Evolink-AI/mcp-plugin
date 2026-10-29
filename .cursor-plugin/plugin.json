@@ -1,7 +1,7 @@
 {
   "name": "evolink",
   "displayName": "EvoLink",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Find models, get a quote and generate images, video and music with EvoLink's 150+ models. Sign in with your EvoLink account; no API key needed.",
   "author": {
     "name": "EvoLink"
