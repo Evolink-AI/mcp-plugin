@@ -3,8 +3,8 @@
   "name": "ai.evolink/mcp",
   "title": "EvoLink",
   "description": "150+ image, video and audio models. Quote before you generate; pay as you go.",
-  "version": "1.0.7",
-  "websiteUrl": "https://evolink.ai/mcp?utm_source=mcp_registry&utm_medium=referral&utm_campaign=mcp_remote&utm_content=registry_listing",
+  "version": "1.0.8",
+  "websiteUrl": "https://evolink.ai/mcp",
   "icons": [
     {
       "src": "https://cdn.evolink.ai/mcp/brand/evolink-icon-256.png",
