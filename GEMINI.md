@@ -33,10 +33,11 @@ tools, permission denials, and failed authorization truthfully.
   Unknown search counts, token usage, or media duration mean an unknown final
   total; disclose rates and any known subtotal. Never invent usage counts or
   treat a partial subtotal as a successful budget check.
-- GPT Image token models (`gpt-image-1.5`, `gpt-image-2`, `gpt-image-2.5-*`)
-  return `token_billed` with a reference price: what EvoLink reserves at
-  submission for the input, settled by actual token usage afterwards. Do not pass
-  token counts for them; an explicit budget must cover 1.5 times that price.
+- GPT Image token models (`gpt-image-1.5`, `gpt-image-2`, `gpt-image-2.5-*`,
+  `gpt-image-2.6-*`) return `token_billed` with a reference price: what
+  EvoLink reserves at submission for the input, settled by actual token usage
+  afterwards. Do not pass token counts for them; an explicit budget must cover
+  1.5 times that price.
 - Obtain explicit approval of each quoted paid task before using a generation
   tool. Installation, login, or approval of another task does not approve a new
   charge. Changed or expired quotes need a new estimate and approval.
