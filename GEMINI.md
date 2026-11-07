@@ -38,6 +38,12 @@ tools, permission denials, and failed authorization truthfully.
   EvoLink reserves at submission for the input, settled by actual token usage
   afterwards. Do not pass token counts for them; an explicit budget must cover
   1.5 times that price.
+- Gemini Omni Flash video models (`gemini-omni-flash-*`,
+  `gemini-omni-1.1-flash-*`, `gemini-omni-1.2-flash-*`) return a reference
+  price the same way. Pass an input or reference video's length as
+  `media_seconds` (for several reference videos, the longest one's). EvoLink
+  reads that video's resolution at submission, so the reference counts it at
+  4k and the estimate also gives the price at a lower resolution; show both.
 - Obtain explicit approval of each quoted paid task before using a generation
   tool, unless the user opted out of estimates (below). Installation, login, or
   approval of another task does not approve a new charge. A changed quote needs
