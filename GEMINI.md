@@ -39,8 +39,27 @@ tools, permission denials, and failed authorization truthfully.
   afterwards. Do not pass token counts for them; an explicit budget must cover
   1.5 times that price.
 - Obtain explicit approval of each quoted paid task before using a generation
-  tool. Installation, login, or approval of another task does not approve a new
-  charge. Changed or expired quotes need a new estimate and approval.
+  tool, unless the user opted out of estimates (below). Installation, login, or
+  approval of another task does not approve a new charge. A changed quote needs
+  a new estimate and approval. An approval is current for 24 hours; an expired
+  one still holds while the input and price are unchanged.
+- When the user explicitly says not to estimate or confirm (for example
+  "generate directly"), skip `estimate_cost` and the confirmation and pass
+  `skip_estimate: true`, within the scope the user gave: this task, this batch,
+  or every later generation in this conversation; if unclear, only this task.
+  Never infer it from silence, the balance, or your own suggestion. When the
+  opt-out covers the rest of the conversation, say once that later generations
+  will be submitted without asking, and that a new conversation or a request to
+  restore estimates brings them back. Invalid input and an explicit budget are
+  still refused, and search still needs approval.
+- If an estimate fails for a reason other than invalid input, or has no total,
+  and the user has not opted out, ask once whether to generate anyway with the
+  cost settled by actual usage; on yes, use `skip_estimate: true`.
+- For several tasks of one model, pass `inputs` (up to 50) to `estimate_cost`
+  and then, with its `pricing_quote`, to the generation tool: one estimate, one
+  approval of the total, and one call that returns every task ID at once.
+  Collect results with `list_tasks`. Do not rely on `n` for the image count;
+  some models, such as GPT Image, often return fewer images than `n`.
 - Preserve any explicit user budget. An estimate comparison is not a guaranteed
   final settlement maximum. Pause when pricing or a budget cannot be checked.
 
@@ -49,7 +68,10 @@ tools, permission denials, and failed authorization truthfully.
 Use the actual discovered tool schemas. Retain quote, request, and task IDs.
 When a submission's outcome is unknown, inspect the existing task/history before
 any retry; do not create a replacement paid task to repair a lost response,
-failed query, or download. Poll existing tasks and deliver the original result
+failed query, or download. To finish a batch, call again with the same
+`client_request_id` and exactly the same `inputs` within 24 hours; never
+resubmit its accepted, not-submitted, or unknown-outcome items under a new
+`client_request_id`. Poll existing tasks and deliver the original result
 links and reported charge. Do not claim success without a verified response.
 
 Follow the host's normal permission flow after a denied tool call. Do not switch
