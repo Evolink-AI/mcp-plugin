@@ -43,12 +43,16 @@ tools, permission denials, and failed authorization truthfully.
   price the same way. Pass an input or reference video's length as
   `media_seconds` (for several reference videos, the longest one's). EvoLink
   reads that video's resolution at submission, so the reference counts it at
-  4k and the estimate also gives the price at a lower resolution; show both.
+  4k, and the estimate also gives the price at each input resolution; show
+  them all.
+- `qwen-audio-3.1-tts-flash` speech returns a reference price the same way,
+  from its text. Do not pass token counts for it.
 - Obtain explicit approval of each quoted paid task before using a generation
   tool, unless the user opted out of estimates (below). Installation, login, or
-  approval of another task does not approve a new charge. A changed quote needs
-  a new estimate and approval. An approval is current for 24 hours; an expired
-  one still holds while the input and price are unchanged.
+  approval of another task does not approve a new charge. An approval holds for
+  its input for 24 hours from the estimate, at the approved price or lower; a
+  changed input, a higher price or an expired approval needs a new estimate
+  (free) and approval.
 - When the user explicitly says not to estimate or confirm (for example
   "generate directly"), skip `estimate_cost` and the confirmation and pass
   `skip_estimate: true`, within the scope the user gave: this task, this batch,
@@ -75,10 +79,13 @@ Use the actual discovered tool schemas. Retain quote, request, and task IDs.
 When a submission's outcome is unknown, inspect the existing task/history before
 any retry; do not create a replacement paid task to repair a lost response,
 failed query, or download. To finish a batch, call again with the same
-`client_request_id` and exactly the same `inputs` within 24 hours; never
-resubmit its accepted, not-submitted, or unknown-outcome items under a new
-`client_request_id`. Poll existing tasks and deliver the original result
-links and reported charge. Do not claim success without a verified response.
+`client_request_id` and exactly the same `inputs` within 24 hours of its first
+submission; within those 24 hours, never resubmit its accepted, not-submitted,
+or unknown-outcome items under a new `client_request_id`. Past them, check
+`list_tasks` first and submit only the items that did not go through, as a new
+batch with a new `client_request_id`. Poll existing tasks and deliver the
+original result links and reported charge. Do not claim success without a
+verified response.
 
 Follow the host's normal permission flow after a denied tool call. Do not switch
 transports, remove a budget, or broaden permissions to bypass the denial.
