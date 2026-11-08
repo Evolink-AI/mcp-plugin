@@ -54,7 +54,7 @@ When the client requests authentication, choose **Authenticate** for EvoLink and
 
 After returning to the client, confirm the connection status and inspect the available tools. Then request actual free `check_balance` and `search_models` calls, followed by a suitable `get_model` and `estimate_cost` request. Tool discovery alone is not proof of authenticated access. Do not invoke `generate_image`, `generate_video`, or `generate_audio` during this installation check.
 
-Generation uses the user's EvoLink balance. Review an estimate and obtain explicit approval before each paid request. Keep optional search disabled until its additional costs are reviewed and approved. These instructions do not replace client permissions or enforce a final billing cap.
+Generation uses the user's EvoLink balance. Review an estimate and obtain explicit approval before each paid request, unless the user explicitly says not to estimate or confirm. Keep optional search disabled until its additional costs are reviewed and approved. These instructions do not replace client permissions or enforce a final billing cap.
 
 If authentication fails, record the client version, transport, and redacted error. Do not replace OAuth with a shared API key, disable certificate checks, or enable blanket automatic approval to bypass the failure.
 

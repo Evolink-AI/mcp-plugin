@@ -26,10 +26,11 @@ If tools such as `search_models` and `generate_video` are not available, the ser
 1. Understand what the user wants: image, video, music or speech, plus style, length and aspect ratio. Ask only for what is missing.
 2. Find models with `search_models`, or let `recommend_models` compare candidates for the request and its reference inputs. Check parameters with `get_model` and look up the official model references with `search_docs`. Follow the model-selection guidance below.
 3. Pass `model` as its own argument and every other parameter inside `input`, named exactly as `get_model` lists them.
-4. Before each new paid generation, call `estimate_cost` with the exact `model` and `input` you plan to send. Show the model, output settings and estimated cost. Explain any partial estimate or unknown final cost. End the reply and wait for the user to explicitly approve that quoted task before calling a generate tool. Follow the approval rules below.
+4. Before each new paid generation, call `estimate_cost` with the exact `model` and `input` you plan to send. Show the model, output settings and estimated cost. Explain any partial estimate or unknown final cost. End the reply and wait for the user to explicitly approve that quoted task before calling a generate tool. Follow the approval rules below. Skip this step only when the user opted out of estimates (see Generating without an estimate below).
 5. Generate with `generate_image`, `generate_video` or `generate_audio`:
    - `generate_image` waits up to 40 seconds and returns the links when ready, otherwise a `task_id`.
    - `generate_video` and `generate_audio` return a `task_id` at once.
+   - `wait_seconds` (0–40) changes the wait for any of them; 0 returns the `task_id` right after submitting.
 6. For every `task_id`, call `get_task` (it waits up to 45 seconds per call) until the status is `completed` or `failed`. Never call a generate tool again to check progress: that starts and charges a new task.
 7. Give the result links to the user right away; they expire after 24 hours. `get_task` also reports the final charge.
 
@@ -93,9 +94,10 @@ Reply "Confirm generation" and I will submit this generation task.
 - For a complete estimate, show the returned amount or range in credits and approximate USD. Label it as an estimate, not a guaranteed final charge.
 - Do not add a separate estimated cap or max_cost_usd to the default confirmation. If the user specified a budget, state whether the estimate fits it; pause if it exceeds the budget. A budget comparison does not limit the final settlement.
 - For a partial estimate, label it "部分估价" / "Partial estimate", state what is excluded, and say it is neither the total nor an upper bound.
+- For a batch (`inputs`), use one confirmation for the whole batch: in Output give the number of items and what differs between them, and in Cost the total plus the price per item, or the range when items differ. One approval covers exactly that batch.
 - Keep model web and image search off unless the user explicitly requests or approves enabling it. Never enable search on your own or just because a copied example enables it. If you think search is needed, first explain its extra per-search rates and unknown total, end the reply, and wait for explicit user consent before enabling it. Approval of a task without search does not authorize adding search; changed search settings require a fresh estimate and approval.
 - When search_charges is returned, disclose each enabled search type and its per-search rate before generation approval, even when the user requested search. A zero-search subtotal excludes unknown search fees; one task may search multiple times or not at all. Expected counts are assumptions, not execution limits. Actual counts depend on the task and model strategy. Do not add a search-fee warning when search is off.
-- For token billing, say "按实际 token 用量计费，生成前无法确定总价" / "Billed by actual token usage; the total is unknown before generation." Include the applicable published unit rates when returned. If no price is available, say so rather than assuming token billing.
+- For a token_billed estimate, show the reference price in credits and approximate USD and say "参考价 {积分}（约 {美元}），按实际 token 用量结算，完成后多退少补，实际可能更低或略高" / "Reference price {credits} (about {USD}); billed by actual token usage and settled when the task finishes, so the final charge may be lower or slightly higher." When size is auto (except a GIF, whose frames have a fixed size), add that setting a size gives a closer reference price. For a Gemini Omni video with an input or reference video, pass its length as media_seconds; the reference counts that video at the highest resolution (4k), so also show the lower-resolution price the estimate gives. If an estimate still needs token usage, say "按实际 token 用量计费，生成前无法确定总价" / "Billed by actual token usage; the total is unknown before generation." and include the applicable published unit rates when returned. If no price is available, say so rather than assuming token billing.
 - If the user set a fixed cap that cannot be checked, explain that gap and replace the usual closing with an explicit question about proceeding without that cap. Do not treat a generic "Confirm generation" as consent to remove or raise a cap.
 - The suggested confirmation phrase is not a required command; any clear approval of the quoted task is valid. Existing task or batch approval still follows the spending approval rules; do not ask again when it already covers this request.
 - Keep routine explanations about the task and cost, for example "这次生成需要确认费用" / "Please confirm the cost for this generation." Do not add skill paths, filenames or quoted internal rules to routine confirmations unless the user asks or higher-priority host instructions require them.
@@ -107,7 +109,25 @@ Reply "Confirm generation" and I will submit this generation task.
 - Your own suggested budget, a model recommendation, sufficient balance or a general request to generate is not spending approval. For example, after you suggest a $0.22 trial and the user asks to change a video's background, quote that exact edit and wait for approval.
 - A new variation, regeneration or retry after a failed task is a new paid generation. Confirm again unless the explicit batch approval covers it. Checking an existing task does not need a new spending approval.
 - Never remove or raise a user spending cap without explicit approval. A partial or unavailable quote cannot prove that a fixed budget covers the request: explain the gap and ask before proceeding without a cap.
+- An approval from `estimate_cost` (`pricing_quote`) is current for 24 hours. Past that it still holds while the input and price are unchanged; a changed price or input needs a new estimate and approval.
 - These are assistant instructions. Client approval prompts depend on the client's settings; this skill does not enforce approval on the server.
+
+## Generating without an estimate
+
+When the user explicitly says not to estimate or not to confirm (for example "generate directly", "no need to estimate", "stop asking", "from now on just generate"), skip `estimate_cost` and the confirmation and pass `skip_estimate: true`, within the scope the user gave: this task, this batch, or every later generation in this conversation. If the scope is unclear, apply it to this task only. Never infer it from silence, the balance or your own suggestion.
+
+- When the user opts out for the rest of the conversation, tell them once, clearly, that later generations in this conversation will be submitted without asking, and that they can start a new conversation or ask you to restore estimates to bring them back.
+- If `estimate_cost` fails for a reason other than invalid input, or gives no total, generate with `skip_estimate: true` when the user has opted out; otherwise ask once, in one sentence, whether to generate anyway with the cost settled by actual usage, and on yes use `skip_estimate: true`.
+- `skip_estimate` does not set aside an explicit budget, does not approve enabling model web or image search and does not change what is charged. After submitting, tell the user what was reserved or charged.
+
+## Several images or tasks
+
+- For several tasks of one model, pass `inputs` (up to 50 items, each like `input`) to `estimate_cost` and then, with its `pricing_quote`, to the generate tool: one estimate, one approval for the batch total, and one call that submits every item at once and returns each `task_id` right away. `media_seconds` and `pricing_parameters` apply to every item.
+- For tasks of different models, submit one task per item with `wait_seconds: 0`.
+- Either way, collect the results with `list_tasks` (`task_ids`, up to 50 per call; free and read-only, so these calls can run in parallel), and tell the user the tasks generate at the same time.
+- Do not rely on `n` for the count: some models, such as GPT Image, often return fewer images than `n`.
+- To finish a batch, call the generate tool again with the same `client_request_id` and exactly the same `inputs` within 24 hours: the items its result lists to finish are then submitted, and accepted items return their original tasks without a new charge. For an item with an unknown outcome, retry later the same way or check `list_tasks`.
+- Never resubmit accepted, not-submitted or unknown-outcome items under a new `client_request_id`: that creates and charges new tasks. An item refused because it differs from what that `client_request_id` submitted earlier is a new task: it needs a new estimate, approval and `client_request_id`.
 
 ## Costs and limits
 

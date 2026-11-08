@@ -160,6 +160,8 @@ The `evolink-mcp` skill instructs the assistant to use EvoLink by default for me
 
 Before a paid task, the assistant should quote the exact settings and wait for explicit approval. Only your explicit approval of a task or batch with a sufficient budget allows it to continue without asking again; the assistant’s suggested budget is not approval. Partial or unknown costs must be explained before you decide to proceed. New generations outside an approved batch need a new confirmation.
 
+If you tell the assistant not to estimate or confirm (for example "generate directly"), it submits without asking, for the scope you gave. When that covers the rest of the conversation, it says so once; start a new conversation or ask it to restore estimates to bring them back. For several images or tasks of one model, it quotes the whole batch once and submits it in one call.
+
 These are assistant instructions, not a server-side approval gate. Client tool approval prompts depend on your settings. In Codex, set `approval_mode = "prompt"` under each `[mcp_servers.evolink.tools.generate_image]`, `[mcp_servers.evolink.tools.generate_video]` and `[mcp_servers.evolink.tools.generate_audio]` entry if you want a tool prompt for every paid call.
 
 ## Costs and control
