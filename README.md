@@ -125,7 +125,7 @@ openclaw mcp add evolink --url https://mcp.evolink.ai/mcp --transport streamable
 npx skills add Evolink-AI/mcp-plugin
 ```
 
-This installs the `evolink-mcp` skill for agents that support skills. Add the MCP server in your client as shown above; the skill alone cannot generate anything.
+This installs the `evolink-mcp` and `evolink-ad-rebuild` skills for agents that support skills. Add the MCP server in your client as shown above; the skills alone cannot generate anything.
 
 ### Upgrading from `evolink-media`
 
@@ -151,6 +151,9 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `upload_file` | Store a public link or a file under 1 MB on EvoLink and get a link for generation | Free |
 | `prepare_upload` | Get a one-time upload URL for a local file up to 95 MB | Free |
 | `get_upload` | Check a one-time upload and get the file link | Free |
+| `get_media_workflow` | Signed-in connections: step-by-step rules for an EvoLink workflow, and one estimated total for the whole run | Free |
+| `analyze_video` | Signed-in connections: read a video for a workflow step (shot breakdown, sound, or a check against the target) | By tokens, usually under 2 credits |
+| `get_video_analysis` | Collect a video read that was still running | Free |
 
 The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 72 hours.
 
@@ -163,6 +166,14 @@ Before a paid task, the assistant should quote the exact settings and wait for e
 If you tell the assistant not to estimate or confirm (for example "generate directly"), it submits without asking, for the scope you gave. When that covers the rest of the conversation, it says so once; start a new conversation or ask it to restore estimates to bring them back. For several images or tasks of one model, it quotes the whole batch once and submits it in one call.
 
 These are assistant instructions, not a server-side approval gate. Client tool approval prompts depend on your settings. In Codex, set `approval_mode = "prompt"` under each `[mcp_servers.evolink.tools.generate_image]`, `[mcp_servers.evolink.tools.generate_video]` and `[mcp_servers.evolink.tools.generate_audio]` entry if you want a tool prompt for every paid call.
+
+## Ad rebuild workflow
+
+The `evolink-ad-rebuild` skill rebuilds a reference ad of up to 30 seconds as a new ad with your own product and creator. The assistant reads the reference, builds keyframes, generates one complete video with sound, and checks every shot of the result. The structure, hook and rhythm of the reference stay; the person, product, room, words and music are new.
+
+It needs a signed-in EvoLink connection. The working rules for each step come from EvoLink after sign-in, so this repository holds only the entry skill.
+
+The assistant shows one estimated total before any paid step and asks once. After that it asks again only if the total would be exceeded, if a decision is yours, or if the finished ad needs a new attempt. A failed generation is not charged. The total depends mostly on the length and resolution of the video, so check both before you confirm.
 
 ## Costs and control
 
@@ -179,17 +190,18 @@ These are assistant instructions, not a server-side approval gate. Client tool a
 | `.agents/plugins/marketplace.json` | Codex |
 | `.cursor-plugin/plugin.json` | Cursor |
 | `skills/evolink-mcp/SKILL.md` | All of the above, and `npx skills add` |
+| `skills/evolink-ad-rebuild/SKILL.md` | The entry point of the ad rebuild workflow, for the same clients |
 | `server.json` | The official MCP Registry entry `ai.evolink/mcp` |
 | `gemini-extension.json`, `GEMINI.md` | Gemini CLI |
 | `.grok-plugin/plugin.json`, `.mcp.json` | Grok Build |
 
-The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository holds only the client configuration and the skill.
+The MCP server itself runs at `https://mcp.evolink.ai/mcp`; this repository holds only the client configuration and the skills.
 
 ## Network endpoints and credentials
 
 - **MCP server:** `https://mcp.evolink.ai/mcp` (Streamable HTTP). Every tool call goes there. Prompts, parameters and reference file links are sent to EvoLink to run the task; results come back as links.
 - **Sign-in:** OAuth 2.1 with PKCE through `https://passport.evolink.ai`, with the approval page on `evolink.ai`. Scopes are `mcp` and `offline_access`. Your assistant stores the tokens it receives.
-- **No secrets or local code:** this repository contains no API keys, hooks, scripts or post-install commands. It holds configuration files and a Markdown skill.
+- **No secrets or local code:** this repository contains no API keys, hooks, scripts or post-install commands. It holds configuration files and Markdown skills.
 
 ## Support
 

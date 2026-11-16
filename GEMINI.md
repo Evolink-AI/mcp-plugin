@@ -93,3 +93,15 @@ Never read other applications' credentials or request secrets in chat.
 
 Connection and discovery are free. Generation uses the user's EvoLink balance
 at published API prices. Support: support@evolink.ai.
+
+## Ad rebuild workflow
+
+When the user asks to rebuild, remake or clone a reference ad with their own
+product and creator, call `get_media_workflow` with `workflow` set to
+`ad-rebuild` and follow the rules it returns, section by section. Pass the
+`run_id` it gives on every later call. The reference must be 30 seconds or
+shorter. Do only free work before the user confirms the single estimated total
+(`estimate`). After that, run through to delivery and ask again only when the
+total would be exceeded, a decision is the user's, or the finished ad needs a
+new attempt. If `get_media_workflow` is not listed, the connection is not
+signed in or the workflow is not available yet.
