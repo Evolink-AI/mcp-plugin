@@ -155,7 +155,7 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `analyze_video` | Signed-in connections: read a video for a workflow step (shot breakdown, sound, or a check against the target) | By tokens, usually under 2 credits |
 | `get_video_analysis` | Collect a video read that was still running | Free |
 
-The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 72 hours.
+The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 7 days.
 
 ## Default provider and confirmation
 
