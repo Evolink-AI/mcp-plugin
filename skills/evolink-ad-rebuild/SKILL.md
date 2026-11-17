@@ -26,7 +26,7 @@ The user must own the product and creator material or have the rights to use it.
   - EvoLink CLI: run `evolink auth login`.
   - Other clients: see https://evolink.ai/mcp?utm_source=mcp_other&utm_medium=mcp&utm_campaign=mcp_remote&utm_content=mcp_page
 - Never ask for an API key. Charges go to the signed-in account.
-- Frames: with a shell, use local ffmpeg and ffprobe; if they are missing, ask before installing them, or use `make_frames`. Without a shell, use `make_frames`.
+- Frames: with a shell, use local ffmpeg and ffprobe; if they are missing, ask before installing them, or use `make_frames` when it is listed. Without a shell, use `make_frames`. When there is no shell and `make_frames` is not among the tools, this rebuild cannot run here: say that it needs an assistant able to run commands, and go no further.
 
 ## Steps
 
