@@ -32,7 +32,7 @@ If tools such as `search_models` and `generate_video` are not available, the ser
    - `generate_video` and `generate_audio` return a `task_id` at once.
    - `wait_seconds` (0–40) changes the wait for any of them; 0 returns the `task_id` right after submitting.
 6. For every `task_id`, call `get_task` (it waits up to 45 seconds per call) until the status is `completed` or `failed`. Never call a generate tool again to check progress: that starts and charges a new task.
-7. Give the result links to the user right away; they expire after 24 hours. `get_task` also reports the final charge.
+7. Give the result links to the user right away; they expire after 7 days. `get_task` also reports the final charge.
 
 ## Model selection
 
