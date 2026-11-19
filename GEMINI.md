@@ -102,6 +102,7 @@ product and creator, call `get_media_workflow` with `workflow` set to
 `run_id` it gives on every later call. The reference must be 30 seconds or
 shorter. Do only free work before the user confirms the single estimated total
 (`estimate`). After that, run through to delivery and ask again only when the
-total would be exceeded, a decision is the user's, or the finished ad needs a
-new attempt. If `get_media_workflow` is not listed, the connection is not
-signed in or the workflow is not available yet.
+total would be exceeded, a decision is the user's, the finished ad needs a
+new attempt, or a delivered draft may be converted (each conversion is quoted
+and confirmed on its own). If `get_media_workflow` is not listed, the
+connection is not signed in or the workflow is not available yet.
