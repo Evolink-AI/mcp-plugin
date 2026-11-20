@@ -1,11 +1,13 @@
 ---
 name: evolink-ad-rebuild
-description: Rebuild a reference ad with the user's own product and creator through EvoLink - analyze the reference, build keyframes, generate one complete video with sound, and deliver it with a check of every shot. Use for competitor-ad rebuilds, viral-ad remakes, UGC product ads, try-ons and product demos. Needs a signed-in EvoLink connection. Does not copy the reference's people, footage or audio.
+description: Rebuild a reference ad with the user's own product and creator through EvoLink - analyze the reference, build keyframes, generate one complete video with sound, and deliver it with a keyframe contact sheet, a brief check summary, any important open issues and the cost. Use for competitor-ad rebuilds, viral-ad remakes, UGC product ads, try-ons and product demos. Needs a signed-in EvoLink connection. Does not copy the reference's people, footage or audio.
 ---
 
 # EvoLink Ad Rebuild
 
-Rebuild a reference ad as a new ad with the user's product and creator. The structure, hook and rhythm stay; the person, product, room, words and music are new. The result is one finished vertical video with sound, generated in a single video task and delivered with a keyframe contact sheet, a verdict for every shot and the total cost.
+Rebuild a reference ad as a new ad with the user's product and creator. The structure, hook and rhythm stay; the person, product, room, words and music are new. The result is one finished vertical video with sound, generated in a single video task and delivered with a keyframe contact sheet, a brief summary of the checks, any important open issues, and the cost: the estimate and the actual charge. Give shot-by-shot verdicts only when the user asks for them.
+
+Name it Ad Rebuild when you speak English with the user and 广告复刻 when you speak Chinese, and keep one name for the whole conversation. The user's source video is the reference ad; it is not what this skill is called.
 
 This skill is only the entry point. EvoLink sends the working rules for each step after sign-in. Fetch them with `get_media_workflow` and follow them; do not improvise the steps from this page.
 
@@ -14,7 +16,7 @@ This skill is only the entry point. EvoLink sends the working rules for each ste
 - The reference ad: a video of 30 seconds or less. If it is longer, ask for a segment of 30 seconds or less.
 - Product images, one line on what the product does, and which claims are verified.
 - A creator photo if a specific person should appear. Without one, a fictional adult creator is prepared when the ad needs a person.
-- Choices that cannot be inferred: language, on-camera speech or voiceover, music, aspect ratio, length (up to 30 seconds) and resolution.
+- Choices that cannot be inferred: language, on-camera speech or voiceover, music, aspect ratio and length (up to 30 seconds). Do not ask for the resolution up front: without one, the estimate is made for 720p, and 480p, 1080p, 4K or a 480p draft first are offered next to it.
 
 The user must own the product and creator material or have the rights to use it.
 
@@ -30,7 +32,7 @@ The user must own the product and creator material or have the rights to use it.
 
 ## Steps
 
-Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It returns the overview, a `run_id` and the list of sections. Pass that `run_id` on every later call. Fetch the section of each step as you reach it (`section`), and ask for the estimated total with `estimate` once the output length, the resolution and the number of shots are known.
+Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It returns the overview, a `run_id` and the list of sections. Pass that `run_id` on every later call. Fetch the section of each step as you reach it (`section`), and ask for the estimated total with `estimate` once the output length, the resolution (720p unless the user named another) and the number of shots are known.
 
 0. Check inputs and confirm the cost
 1. Read the reference
@@ -44,9 +46,10 @@ Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It retur
 ## Cost: one estimate, one confirmation
 
 - Before the user confirms, do only free work: sign-in and balance, the reference's duration and aspect ratio, frames and shot count, rules and prices.
-- Present one estimated total and what it covers, and ask once. Charges are then made step by step as the work runs.
-- After confirmation, run through to delivery. Ask again only when the total would be exceeded, when a decision is the user's, or when the finished ad needs a new attempt.
-- If the user asks what the total includes, say the total and what it covers. Every call is listed in the dashboard history: https://evolink.ai/dashboard
+- Present one estimated total and what it covers, and ask once. If the user named no resolution, that total is for 720p and the other choices follow it; when the user picks one of them, estimate it (free) and present that single total instead. Charges are then made step by step as the work runs.
+- If the client can show a question with answers to pick, ask through it: the suggested answer first, and room for the user to type a different one. Otherwise ask in one short message.
+- After confirmation, run through to delivery. Ask again only when the total would be exceeded, when a decision is the user's, when the finished ad needs a new attempt, or, on the draft route, once the draft is delivered: then ask whether to convert it to 1080p or 4K. Quote and confirm each conversion on its own; it is not part of the total.
+- At delivery, show the actual charge next to the estimated total. If the user wants detail, break the charge down by task; they can also list their tasks, or sign in to the dashboard with the same EvoLink account, where every call is listed: https://evolink.ai/dashboard
 
 ## If something stops the run
 

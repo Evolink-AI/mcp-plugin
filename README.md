@@ -154,6 +154,7 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `get_media_workflow` | Signed-in connections: step-by-step rules for an EvoLink workflow, and one estimated total for the whole run | Free |
 | `analyze_video` | Signed-in connections: read a video for a workflow step (shot breakdown, sound, or a check against the target) | By tokens, usually under 2 credits |
 | `get_video_analysis` | Collect a video read that was still running | Free |
+| `make_frames` | Signed-in connections: frames, crops and contact sheets of a video, and numbered image boards, for assistants that cannot run commands | Free |
 
 The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 7 days.
 
@@ -173,7 +174,7 @@ The `evolink-ad-rebuild` skill rebuilds a reference ad of up to 30 seconds as a 
 
 It needs a signed-in EvoLink connection. The working rules for each step come from EvoLink after sign-in, so this repository holds only the entry skill.
 
-The assistant shows one estimated total before any paid step and asks once. After that it asks again only if the total would be exceeded, if a decision is yours, or if the finished ad needs a new attempt. A failed generation is not charged. The total depends mostly on the length and resolution of the video, so check both before you confirm.
+The assistant shows one estimated total before any paid step and asks once; if you name no resolution, the total is for 720p, with 480p, 1080p, 4K or a 480p draft first as other choices. After that it asks again only if the total would be exceeded, if a decision is yours, if the finished ad needs a new attempt, or, with a draft, whether to convert it to 1080p or 4K (each conversion is priced and confirmed on its own). A failed generation is not charged. The total depends mostly on the length and resolution of the video, so check both before you confirm.
 
 ## Costs and control
 
