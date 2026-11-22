@@ -155,6 +155,8 @@ Install the new skill first and check that `evolink-mcp` appears in your agent. 
 | `analyze_video` | Signed-in connections: read a video for a workflow step (shot breakdown, sound, or a check against the target) | By tokens, usually under 2 credits |
 | `get_video_analysis` | Collect a video read that was still running | Free |
 | `make_frames` | Signed-in connections: frames, crops and contact sheets of a video, and numbered image boards, for assistants that cannot run commands | Free |
+| `generate_workflow_media` | Signed-in connections: submit a paid generation as a step of a workflow run, so that the result can be found from the run | Model price |
+| `record_workflow_delivery` | Signed-in connections: record which finished video of a workflow run was delivered | Free |
 
 The hosted server can't read paths on your computer. Give reference files as public links, pass files under 1 MB directly, or let an assistant that can run commands (Claude Code, Codex, Cursor) upload a local file of up to 95 MB with `prepare_upload`. Uploads are free and deleted after 7 days.
 
