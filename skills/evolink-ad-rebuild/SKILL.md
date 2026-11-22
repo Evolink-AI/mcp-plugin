@@ -32,7 +32,7 @@ The user must own the product and creator material or have the rights to use it.
 
 ## Steps
 
-Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It returns the overview, a `run_id` and the list of sections. Pass that `run_id` on every later call. Fetch the section of each step as you reach it (`section`), and ask for the estimated total with `estimate` once the output length, the resolution (720p unless the user named another) and the number of shots are known.
+Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It returns the overview, a `run_id` and the list of sections. Pass that `run_id` on every later workflow call. When the service offers `generate_workflow_media`, use it for every paid generation in this workflow with the issued run ID and generation step. Fetch the section of each step as you reach it (`section`), and ask for the estimated total with `estimate` once the output length, the resolution (720p unless the user named another) and the number of shots are known.
 
 0. Check inputs and confirm the cost
 1. Read the reference
