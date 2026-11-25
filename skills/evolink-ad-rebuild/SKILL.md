@@ -46,7 +46,7 @@ Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It retur
 ## Cost: one estimate, one confirmation
 
 - Before the user confirms, do only free work: sign-in and balance, the reference's duration and aspect ratio, frames and shot count, rules and prices.
-- Present one estimated total and what it covers, and ask once. If the user named no resolution, that total is for 720p and the other choices follow it; when the user picks one of them, estimate it (free) and present that single total instead. Charges are then made step by step as the work runs.
+- Present one estimated total and what it covers, and ask once. If the user named no resolution, that total is for 720p and the other choices follow it; when the user picks one of them, estimate it (free) and present that single total instead. Charges are then made step by step as the work runs: steps finished before a stop or a failure stay charged.
 - If the client can show a question with answers to pick, ask through it: the suggested answer first, and room for the user to type a different one. Otherwise ask in one short message.
 - After confirmation, run through to delivery. Ask again only when the total would be exceeded, when a decision is the user's, when the finished ad needs a new attempt, or, on the draft route, once the draft is delivered: then ask whether to convert it to 1080p or 4K. Quote and confirm each conversion on its own; it is not part of the total.
 - At delivery, show the actual charge next to the estimated total. If the user wants detail, break the charge down by task; they can also list their tasks, or sign in to the dashboard with the same EvoLink account, where every call is listed: https://evolink.ai/dashboard
@@ -54,7 +54,7 @@ Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It retur
 ## If something stops the run
 
 - **Balance too low.** Nothing is charged for the refused step. Give the top-up link from the error. After the user tops up, continue from the same step; finished steps are reused.
-- **A generation fails.** It is not charged. Retry at most twice for a temporary failure, then stop and explain.
+- **A generation fails.** That generation is not charged; the steps finished before it stay charged. Retry at most twice for a temporary failure. Then stop and tell the user that the ad is not finished, what has been charged so far, and that they can continue from the failed step later without paying again for the finished steps.
 - **The connection drops or the conversation restarts.** Fetch the rules again with the run ID, and look for submitted tasks with `list_tasks` before submitting anything again. Result links and uploads stay available for 7 days.
 
 ## Rights and limits
