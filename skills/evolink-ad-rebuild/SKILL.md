@@ -55,7 +55,7 @@ Call `get_media_workflow` with `workflow` set to `ad-rebuild` to start. It retur
 
 - **Balance too low.** Nothing is charged for the refused step. Give the top-up link from the error. After the user tops up, continue from the same step; finished steps are reused.
 - **A generation fails.** That generation is not charged; the steps finished before it stay charged. Retry at most twice for a temporary failure. Then stop and tell the user that the ad is not finished, what has been charged so far, and that they can continue from the failed step later without paying again for the finished steps.
-- **The connection drops or the conversation restarts.** Fetch the rules again with the run ID, and look for submitted tasks with `list_tasks` before submitting anything again. Result links and uploads stay available for 7 days.
+- **The connection drops or the conversation restarts.** Fetch the rules again with the run ID, and look for submitted tasks with `list_tasks` before submitting anything again. Result links stay available for 7 days; uploaded files are valid for 72 hours.
 
 ## Rights and limits
 
